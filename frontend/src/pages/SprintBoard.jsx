@@ -349,8 +349,8 @@ export const SprintBoard = () => {
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6">
         
-        {/* Dark Hero Banner Header Box (Unclipped Dropdowns) */}
-        <div className="relative rounded-3xl bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 border border-slate-800 p-6 sm:p-8 mb-6 shadow-2xl text-white">
+        {/* Dark Hero Banner Header Box (High Contrast & Clear Visibility) */}
+        <div className="relative rounded-3xl bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 border border-slate-700/80 p-6 sm:p-8 mb-6 shadow-2xl text-white">
           
           {/* Background Glow Layer clipped to rounded corners */}
           <div className="absolute inset-0 rounded-3xl overflow-hidden pointer-events-none">
@@ -391,7 +391,7 @@ export const SprintBoard = () => {
                   <>
                     <button
                       onClick={() => setShowCreateSprintModal(true)}
-                      className="inline-flex items-center gap-1.5 px-3.5 py-2.5 rounded-2xl bg-white/10 hover:bg-white/20 text-white text-xs font-bold transition-colors border border-white/10 shadow-sm"
+                      className="inline-flex items-center gap-1.5 px-3.5 py-2.5 rounded-2xl bg-slate-800 hover:bg-slate-700 text-white text-xs font-bold transition-colors border border-slate-600 shadow-sm"
                     >
                       <Plus className="w-4 h-4" /> Sprint
                     </button>
@@ -432,7 +432,7 @@ export const SprintBoard = () => {
                   value={taskSearch}
                   onChange={(e) => setTaskSearch(e.target.value)}
                   placeholder="Filter tasks by title..."
-                  className="w-full pl-10 pr-4 py-2.5 bg-slate-800/90 border border-slate-700 rounded-2xl text-xs text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-sky-500 shadow-sm"
+                  className="w-full pl-10 pr-4 py-2.5 bg-slate-800 border border-slate-600 rounded-2xl text-xs text-white placeholder-slate-300 font-medium focus:outline-none focus:ring-2 focus:ring-sky-500 shadow-sm"
                 />
               </div>
 
