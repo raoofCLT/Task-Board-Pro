@@ -349,10 +349,10 @@ export const SprintBoard = () => {
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6">
         
-        {/* Dark Hero Banner Header Box (High Contrast & Clear Visibility) */}
-        <div className="relative rounded-3xl bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 border border-slate-700/80 p-6 sm:p-8 mb-6 shadow-2xl text-white">
+        {/* Dark Hero Banner Header Box */}
+        <div className="relative rounded-3xl bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 border border-slate-800 p-6 sm:p-8 mb-6 shadow-2xl text-white">
           
-          {/* Background Glow Layer clipped to rounded corners */}
+          {/* Background Glow Layer */}
           <div className="absolute inset-0 rounded-3xl overflow-hidden pointer-events-none">
             <div className="absolute top-0 right-0 w-96 h-96 bg-sky-500/10 blur-[120px] rounded-full" />
           </div>
@@ -391,7 +391,7 @@ export const SprintBoard = () => {
                   <>
                     <button
                       onClick={() => setShowCreateSprintModal(true)}
-                      className="inline-flex items-center gap-1.5 px-3.5 py-2.5 rounded-2xl bg-slate-800 hover:bg-slate-700 text-white text-xs font-bold transition-colors border border-slate-600 shadow-sm"
+                      className="inline-flex items-center gap-1.5 px-3.5 py-2.5 rounded-2xl bg-white text-slate-900 dark:bg-slate-800 dark:text-white hover:bg-slate-100 dark:hover:bg-slate-700 text-xs font-bold transition-all border border-slate-200 dark:border-slate-700 shadow-md"
                     >
                       <Plus className="w-4 h-4" /> Sprint
                     </button>
@@ -399,7 +399,7 @@ export const SprintBoard = () => {
                     {activeSprint && (
                       <button
                         onClick={() => handleToggleSprintActive(activeSprint._id)}
-                        className={`inline-flex items-center gap-1.5 px-3.5 py-2.5 rounded-2xl text-xs font-bold transition-all border ${
+                        className={`inline-flex items-center gap-1.5 px-3.5 py-2.5 rounded-2xl text-xs font-bold transition-all border shadow-md ${
                           activeSprint.isActive
                             ? 'bg-amber-500/20 text-amber-300 border-amber-500/30 hover:bg-amber-500/30'
                             : 'bg-emerald-500/20 text-emerald-300 border-emerald-500/30 hover:bg-emerald-500/30'
@@ -422,17 +422,17 @@ export const SprintBoard = () => {
               </div>
             </div>
 
-            {/* Task Search & Filter Toolbar */}
+            {/* Task Search & Filter Toolbar with Floating White Controls */}
             <div className="mt-6 pt-4 border-t border-slate-800/80 grid grid-cols-1 sm:grid-cols-3 gap-3">
               {/* Search */}
               <div className="relative">
-                <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
+                <Search className="w-4 h-4 text-slate-400 dark:text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
                 <input
                   type="text"
                   value={taskSearch}
                   onChange={(e) => setTaskSearch(e.target.value)}
                   placeholder="Filter tasks by title..."
-                  className="w-full pl-10 pr-4 py-2.5 bg-slate-800 border border-slate-600 rounded-2xl text-xs text-white placeholder-slate-300 font-medium focus:outline-none focus:ring-2 focus:ring-sky-500 shadow-sm"
+                  className="w-full pl-10 pr-4 py-2.5 bg-white text-slate-900 dark:bg-slate-800 dark:text-white border border-slate-200 dark:border-slate-700 rounded-2xl text-xs font-bold placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-sky-500 shadow-md transition-all"
                 />
               </div>
 
