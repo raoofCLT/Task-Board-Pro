@@ -6,9 +6,10 @@ let io;
  * Initializes Socket.io instance attached to HTTP Server
  */
 export const initSocket = (server) => {
+  const clientUrl = process.env.CLIENT_URL || '*';
   io = new Server(server, {
     cors: {
-      origin: '*',
+      origin: clientUrl,
       methods: ['GET', 'POST', 'PATCH', 'DELETE']
     }
   });

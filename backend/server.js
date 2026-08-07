@@ -25,8 +25,9 @@ const server = http.createServer(app);
 // Initialize Socket.io real-time engine
 initSocket(server);
 
-// Middleware
-app.use(cors());
+// Middleware (Support explicit CLIENT_URL or fallback to all origins)
+const clientUrl = process.env.CLIENT_URL || '*';
+app.use(cors({ origin: clientUrl, credentials: true }));
 app.use(express.json());
 
 // Routes
