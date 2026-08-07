@@ -5,6 +5,8 @@ import { useAuth } from '../context/AuthContext';
 import { useToast } from '../context/ToastContext';
 import { Navbar } from '../components/Navbar';
 import { CustomSelect } from '../components/ui/CustomSelect';
+import { CustomDatePicker } from '../components/ui/CustomDatePicker';
+import { DateTimePicker } from '../components/ui/DateTimePicker';
 import { io } from 'socket.io-client';
 import {
   Kanban,
@@ -376,7 +378,7 @@ export const SprintBoard = () => {
                 <p className="text-xs text-slate-300 mt-1 max-w-xl">{workspace?.description}</p>
               </div>
 
-              {/* Sprint Controls & Action Buttons */}
+              {/* Sprint Controls & Floating Action Buttons */}
               <div className="flex flex-wrap items-center gap-3">
                 <CustomSelect
                   variant="dark"
@@ -401,11 +403,11 @@ export const SprintBoard = () => {
                         onClick={() => handleToggleSprintActive(activeSprint._id)}
                         className={`inline-flex items-center gap-1.5 px-4 py-2.5 rounded-2xl text-xs font-bold transition-all border shadow-md ${
                           activeSprint.isActive
-                            ? 'bg-amber-500/20 text-amber-300 border-amber-500/40 hover:bg-amber-500/30'
-                            : 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40 hover:bg-emerald-500/30'
+                            ? 'bg-white text-amber-600 dark:bg-slate-800 dark:text-amber-400 border-slate-200 dark:border-slate-700 hover:bg-amber-50 dark:hover:bg-slate-700'
+                            : 'bg-white text-emerald-600 dark:bg-slate-800 dark:text-emerald-400 border-slate-200 dark:border-slate-700 hover:bg-emerald-50 dark:hover:bg-slate-700'
                         }`}
                       >
-                        {activeSprint.isActive ? <Pause className="w-4 h-4 text-amber-400" /> : <Play className="w-4 h-4 text-emerald-400" />}
+                        {activeSprint.isActive ? <Pause className="w-4 h-4 text-amber-500" /> : <Play className="w-4 h-4 text-emerald-500" />}
                         {activeSprint.isActive ? 'Deactivate Sprint' : 'Activate Sprint'}
                       </button>
                     )}
@@ -422,7 +424,7 @@ export const SprintBoard = () => {
               </div>
             </div>
 
-            {/* Task Search & Filter Toolbar */}
+            {/* Task Search & Filter Toolbar with Floating White Controls */}
             <div className="mt-6 pt-4 border-t border-slate-800/80 grid grid-cols-1 sm:grid-cols-3 gap-3">
               {/* Search */}
               <div className="relative">
@@ -647,7 +649,7 @@ export const SprintBoard = () => {
 
       </main>
 
-      {/* Create Sprint Modal */}
+      {/* Create Sprint Modal with Custom Date Pickers */}
       {showCreateSprintModal && (
         <div className="fixed inset-0 z-50 bg-slate-950/70 backdrop-blur-md flex items-center justify-center p-4">
           <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl max-w-md w-full p-6 shadow-2xl">
@@ -672,23 +674,17 @@ export const SprintBoard = () => {
               <div className="grid grid-cols-2 gap-3">
                 <div>
                   <label className="block text-xs font-semibold text-slate-500 dark:text-slate-300 uppercase tracking-wider mb-1">Start Date</label>
-                  <input
-                    type="date"
-                    required
+                  <CustomDatePicker
                     value={newSprintStart}
-                    onChange={(e) => setNewSprintStart(e.target.value)}
-                    className="w-full px-3.5 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl text-slate-900 dark:text-white text-xs"
+                    onChange={(dateStr) => setNewSprintStart(dateStr)}
                   />
                 </div>
 
                 <div>
                   <label className="block text-xs font-semibold text-slate-500 dark:text-slate-300 uppercase tracking-wider mb-1">End Date</label>
-                  <input
-                    type="date"
-                    required
+                  <CustomDatePicker
                     value={newSprintEnd}
-                    onChange={(e) => setNewSprintEnd(e.target.value)}
-                    className="w-full px-3.5 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl text-slate-900 dark:text-white text-xs"
+                    onChange={(dateStr) => setNewSprintEnd(dateStr)}
                   />
                 </div>
               </div>
@@ -709,7 +705,7 @@ export const SprintBoard = () => {
         </div>
       )}
 
-      {/* Create Task Modal */}
+      {/* Create Task Modal with Custom Separate Date & Time Pickers */}
       {showCreateTaskModal && (
         <div className="fixed inset-0 z-50 bg-slate-950/70 backdrop-blur-md flex items-center justify-center p-4">
           <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl max-w-md w-full p-6 shadow-2xl">
@@ -755,18 +751,11 @@ export const SprintBoard = () => {
                 />
               </div>
 
-              <div>
-                <label className="block text-xs font-semibold text-slate-500 dark:text-slate-300 uppercase tracking-wider mb-1">
-                  Due Date & Time
-                </label>
-                <input
-                  type="datetime-local"
-                  required
-                  value={taskDueDate}
-                  onChange={(e) => setTaskDueDate(e.target.value)}
-                  className="w-full px-4 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-2xl text-slate-900 dark:text-white text-xs focus:outline-none focus:ring-2 focus:ring-sky-500 shadow-sm"
-                />
-              </div>
+              {/* SEPARATE CUSTOM DATE & TIME PICKER */}
+              <DateTimePicker
+                value={taskDueDate}
+                onChange={(dateTimeStr) => setTaskDueDate(dateTimeStr)}
+              />
 
               <div>
                 <label className="block text-xs font-semibold text-slate-500 dark:text-slate-300 uppercase tracking-wider mb-1">Assignee</label>
