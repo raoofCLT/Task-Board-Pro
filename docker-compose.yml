@@ -1,0 +1,34 @@
+version: '3.8'
+
+services:
+  # MongoDB Database Service
+  mongodb:
+    image: mongo:latest
+    container_name: taskboard_mongodb
+    restart: always
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_DATABASE: task_board
+    volumes:
+      - mongo-data:/data/db
+
+  # Node.js Backend API Service
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: taskboard_backend
+    restart: always
+    ports:
+      - "5000:5000"
+    environment:
+      PORT: 5000
+      MONGO_URI: mongodb://mongodb:27017/task_board
+      JWT_SECRET: super_secret_task_board_jwt_key_2026
+      NODE_ENV: production
+    depends_on:
+      - mongodb
+
+volumes:
+  mongo-data:
