@@ -14,6 +14,8 @@ export const CustomDatePicker = ({ value, onChange, label = 'Select Date', class
   const [currentMonth, setCurrentMonth] = useState(validDate.getMonth()); // 0-indexed
   const [selectedDay, setSelectedDay] = useState(validDate.getDate());
 
+  const today = new Date();
+
   useEffect(() => {
     if (value) {
       const d = new Date(value);
@@ -65,7 +67,7 @@ export const CustomDatePicker = ({ value, onChange, label = 'Select Date', class
         onClick={() => setIsOpen(true)}
         className="w-full flex items-center justify-between px-3.5 py-2.5 bg-white text-slate-900 dark:bg-slate-800 dark:text-white border border-slate-300 dark:border-slate-700 rounded-2xl text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-sm transition-all text-left"
       >
-        <span className="flex items-center gap-2 truncate">
+        <span className="flex items-center gap-2 truncate font-medium">
           <CalendarIcon className="w-4 h-4 text-indigo-500 shrink-0" />
           {displayString}
         </span>
@@ -114,16 +116,24 @@ export const CustomDatePicker = ({ value, onChange, label = 'Select Date', class
               {Array.from({ length: totalDays }).map((_, i) => {
                 const dayNum = i + 1;
                 const isSelected = selectedDay === dayNum;
+                const isToday =
+                  today.getFullYear() === currentYear &&
+                  today.getMonth() === currentMonth &&
+                  today.getDate() === dayNum;
+
                 return (
                   <button
                     key={dayNum}
                     type="button"
                     onClick={() => setSelectedDay(dayNum)}
-                    className={`w-8 h-8 mx-auto rounded-full flex items-center justify-center font-semibold transition-all ${
+                    className={`w-8 h-8 mx-auto rounded-full flex items-center justify-center font-semibold transition-all relative ${
                       isSelected
                         ? 'bg-indigo-600 text-white font-bold shadow-md shadow-indigo-500/30'
+                        : isToday
+                        ? 'bg-indigo-100 text-indigo-700 dark:bg-indigo-950/80 dark:text-indigo-300 font-black border border-indigo-500/50 shadow-sm'
                         : 'text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800'
                     }`}
+                    title={isToday ? 'Today' : undefined}
                   >
                     {dayNum}
                   </button>
