@@ -349,10 +349,14 @@ export const SprintBoard = () => {
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6">
         
-        {/* Dark Hero Banner Header Box */}
-        <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 border border-slate-800 p-6 sm:p-8 mb-6 shadow-2xl text-white">
-          <div className="absolute top-0 right-0 w-96 h-96 bg-sky-500/10 blur-[120px] rounded-full pointer-events-none" />
+        {/* Dark Hero Banner Header Box (Unclipped Dropdowns) */}
+        <div className="relative rounded-3xl bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 border border-slate-800 p-6 sm:p-8 mb-6 shadow-2xl text-white">
           
+          {/* Background Glow Layer clipped to rounded corners */}
+          <div className="absolute inset-0 rounded-3xl overflow-hidden pointer-events-none">
+            <div className="absolute top-0 right-0 w-96 h-96 bg-sky-500/10 blur-[120px] rounded-full" />
+          </div>
+
           <div className="relative z-10">
             <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
               <div>
@@ -375,11 +379,12 @@ export const SprintBoard = () => {
               {/* Sprint Controls */}
               <div className="flex flex-wrap items-center gap-3">
                 <CustomSelect
+                  variant="dark"
                   options={sprints.map(s => ({ value: s._id, label: `${s.name} ${s.isActive ? '⚡ (Active)' : ''}` }))}
                   value={selectedSprintId}
                   onChange={(val) => setSelectedSprintId(val)}
                   placeholder="Select Sprint..."
-                  className="w-48 text-slate-900 dark:text-white"
+                  className="w-56"
                 />
 
                 {user?.role === 'manager' && !workspace?.isArchived && (
@@ -427,12 +432,13 @@ export const SprintBoard = () => {
                   value={taskSearch}
                   onChange={(e) => setTaskSearch(e.target.value)}
                   placeholder="Filter tasks by title..."
-                  className="w-full pl-10 pr-4 py-2 bg-slate-800/80 border border-slate-700 rounded-xl text-xs text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-sky-500 shadow-sm"
+                  className="w-full pl-10 pr-4 py-2.5 bg-slate-800/90 border border-slate-700 rounded-2xl text-xs text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-sky-500 shadow-sm"
                 />
               </div>
 
               {/* Priority Filter Custom Select */}
               <CustomSelect
+                variant="dark"
                 options={[
                   { value: 'all', label: 'All Priorities' },
                   { value: 'high', label: 'High Priority' },
@@ -445,6 +451,7 @@ export const SprintBoard = () => {
 
               {/* Assignee Filter Custom Select */}
               <CustomSelect
+                variant="dark"
                 options={[
                   { value: 'all', label: 'All Team Assignees' },
                   { value: 'unassigned', label: 'Unassigned Tasks Only' },
