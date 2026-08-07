@@ -376,7 +376,7 @@ export const SprintBoard = () => {
                 <p className="text-xs text-slate-300 mt-1 max-w-xl">{workspace?.description}</p>
               </div>
 
-              {/* Sprint Controls */}
+              {/* Sprint Controls & Action Buttons */}
               <div className="flex flex-wrap items-center gap-3">
                 <CustomSelect
                   variant="dark"
@@ -391,7 +391,7 @@ export const SprintBoard = () => {
                   <>
                     <button
                       onClick={() => setShowCreateSprintModal(true)}
-                      className="inline-flex items-center gap-1.5 px-3.5 py-2.5 rounded-2xl bg-white text-slate-900 dark:bg-slate-800 dark:text-white hover:bg-slate-100 dark:hover:bg-slate-700 text-xs font-bold transition-all border border-slate-200 dark:border-slate-700 shadow-md"
+                      className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-2xl bg-white text-slate-900 hover:bg-slate-50 dark:bg-slate-800 dark:text-white dark:hover:bg-slate-700/90 text-xs font-bold transition-all border border-slate-200 dark:border-slate-700 shadow-md"
                     >
                       <Plus className="w-4 h-4" /> Sprint
                     </button>
@@ -399,13 +399,13 @@ export const SprintBoard = () => {
                     {activeSprint && (
                       <button
                         onClick={() => handleToggleSprintActive(activeSprint._id)}
-                        className={`inline-flex items-center gap-1.5 px-3.5 py-2.5 rounded-2xl text-xs font-bold transition-all border shadow-md ${
+                        className={`inline-flex items-center gap-1.5 px-4 py-2.5 rounded-2xl text-xs font-bold transition-all border shadow-md ${
                           activeSprint.isActive
-                            ? 'bg-amber-500/20 text-amber-300 border-amber-500/30 hover:bg-amber-500/30'
-                            : 'bg-emerald-500/20 text-emerald-300 border-emerald-500/30 hover:bg-emerald-500/30'
+                            ? 'bg-amber-500/20 text-amber-300 border-amber-500/40 hover:bg-amber-500/30'
+                            : 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40 hover:bg-emerald-500/30'
                         }`}
                       >
-                        {activeSprint.isActive ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5" />}
+                        {activeSprint.isActive ? <Pause className="w-4 h-4 text-amber-400" /> : <Play className="w-4 h-4 text-emerald-400" />}
                         {activeSprint.isActive ? 'Deactivate Sprint' : 'Activate Sprint'}
                       </button>
                     )}
@@ -413,7 +413,7 @@ export const SprintBoard = () => {
                     <button
                       disabled={!selectedSprintId}
                       onClick={() => setShowCreateTaskModal(true)}
-                      className="inline-flex items-center gap-2 px-4 py-2.5 rounded-2xl bg-gradient-to-r from-sky-500 to-indigo-600 hover:from-sky-400 hover:to-indigo-500 text-white font-extrabold text-xs shadow-lg shadow-sky-500/25 transition-all disabled:opacity-50"
+                      className="inline-flex items-center gap-2 px-4 py-2.5 rounded-2xl bg-gradient-to-r from-sky-500 to-indigo-600 hover:from-sky-400 hover:to-indigo-500 text-white font-extrabold text-xs shadow-lg shadow-sky-500/30 border border-sky-400/30 transition-all disabled:opacity-50"
                     >
                       <Plus className="w-4 h-4" /> Create Task
                     </button>
@@ -422,11 +422,11 @@ export const SprintBoard = () => {
               </div>
             </div>
 
-            {/* Task Search & Filter Toolbar with Floating White Controls */}
+            {/* Task Search & Filter Toolbar */}
             <div className="mt-6 pt-4 border-t border-slate-800/80 grid grid-cols-1 sm:grid-cols-3 gap-3">
               {/* Search */}
               <div className="relative">
-                <Search className="w-4 h-4 text-slate-400 dark:text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
+                <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
                 <input
                   type="text"
                   value={taskSearch}
